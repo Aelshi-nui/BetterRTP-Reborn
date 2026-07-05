@@ -1,6 +1,6 @@
 # Translated by Lynx1 (https://discord.com/users/346916032633503745)
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success:
     Paid: '&aВас було телепортовано на координати&7 x=%x% y=%y% z=%z% за &c$%price%&7!'
     Bypass: '&aВас було телепортовано на координати&7 x=%x% y=%y% z=%z%'
@@ -38,7 +38,7 @@ Messages:
     Set: '&bУспішно! &7%type% встановлено на %value%'
     Remove: '&cВидалено! &7Ви видалили Custom World %world%'
 Help:
-  Prefix: '&e&m-----&6&l BetterRTP &8| Help &e&m-----'
+  Prefix: '&e&m-----&6&l BetterRTPx &8| Help &e&m-----'
   Main: ' &7- &e/%command% &7- Телепортує вас в випадкове місце!'
   Biome: ' &7- &e/%command% biome <biome1, biome2...> &7- Телепортує вас в випадкове
     місце серед вибраних біомів'
@@ -60,7 +60,7 @@ Help:
   Location: ' &7- &e/%command% location <location_name> &7- Телепортує в випадкове
     місце конкретної локації'
   List:
-  - '&e&m------&r &6&lBetterRTP &8| &7Help &e&m------'
+  - '&e&m------&r &6&lBetterRTPx &8| &7Help &e&m------'
   - ' &7- &e/%command% &7- Телепортує вас в випадкове місце!'
   RtpOther: ' &7- &e/%command% <player> &7- Телепортує вибраного гравця в випадкове
     місце!'
@@ -86,11 +86,11 @@ Titles:
   Enabled: true
   Delay:
     SendChatMessage: true
-    Title: '&6BetterRTP by SRC'
+    Title: '&6BetterRTPx by SRC'
     Subtitle: '&fТелепортація через %time% секунд!'
   Success:
     SendChatMessage: true
-    Title: '&6BetterRTP by SRC'
+    Title: '&6BetterRTPx by SRC'
     Subtitle: '&fТелепортація на координати x=%x% y=%y% z=%z%'
 Sounds:
   Enabled: true

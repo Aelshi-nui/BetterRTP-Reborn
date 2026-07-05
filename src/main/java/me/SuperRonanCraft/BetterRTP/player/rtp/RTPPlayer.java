@@ -1,14 +1,10 @@
 package me.SuperRonanCraft.BetterRTP.player.rtp;
 
-import java.util.concurrent.CompletableFuture;
-
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import io.papermc.lib.PaperLib;
 import lombok.Getter;
 import me.SuperRonanCraft.BetterRTP.BetterRTP;
 import me.SuperRonanCraft.BetterRTP.references.customEvents.RTP_FailedEvent;
@@ -45,8 +41,8 @@ public class RTPPlayer {
             Bukkit.getServer().getPluginManager().callEvent(event);
             //Async Location finder
             if (event.isCancelled()) {
-                randomlyTeleport(sendi);
                 attempts++;
+                AsyncHandler.syncAtEntity(player, () -> randomlyTeleport(sendi));
                 return;
             }
             AsyncHandler.async(() -> {
@@ -62,21 +58,11 @@ public class RTPPlayer {
                         loc = RandomLocation.generateLocation(worldPlayer);
                 }
                 attempts++; //Add an attempt
-                //Load chunk and find out if safe location (asynchronously)
-                AsyncHandler.sync(() -> {
-                    try { //Prior to 1.12 this async chunk will NOT work
-                        CompletableFuture<Chunk> chunk = PaperLib.getChunkAtAsync(loc);
-                        chunk.thenAccept(result -> {
-                            //BetterRTP.debug("Checking location for " + p.getName());
-                            attempt(sendi, loc);
-                        });
-                    } catch (IllegalStateException e) {
-                        //Legacy non-async support
-                        attempt(sendi, loc);
-                    } catch (Throwable ignored) {
-
-                    }
-                });
+                if (loc == null) {
+                    AsyncHandler.syncAtEntity(player, () -> randomlyTeleport(sendi));
+                    return;
+                }
+                AsyncHandler.syncAtLocation(loc, () -> attempt(sendi, loc));
             });
         }
     }
@@ -88,21 +74,30 @@ public class RTPPlayer {
         //Valid location?
         if (tpLoc != null && checkDepends(tpLoc)) {
             tpLoc.add(0.5, 0, 0.5); //Center location
-            if (getPl().getEco().charge(player, worldPlayer)) {
+            final Location finalLoc = tpLoc;
+            AsyncHandler.syncAtEntity(player, () -> finishAttempt(sendi, finalLoc));
+        } else {
+            QueueHandler.remove(loc);
+            AsyncHandler.syncAtEntity(player, () -> randomlyTeleport(sendi));
+        }
+    }
+
+    private void finishAttempt(CommandSender sendi, Location tpLoc) {
+        if (!player.isOnline()) {
+            getPl().getPInfo().getRtping().remove(player);
+            return;
+        }
+        if (getPl().getEco().charge(player, worldPlayer)) {
                 //Successfully found a safe location, set cooldown and teleport player.
                 if (worldPlayer.getPlayerInfo().isApplyCooldown() && HelperRTP_Check.applyCooldown(player))
                     getPl().getCooldowns().add(player, worldPlayer.getWorld());
                 tpLoc.setYaw(player.getLocation().getYaw());
                 tpLoc.setPitch(player.getLocation().getPitch());
-                AsyncHandler.sync(() -> settings.teleport.sendPlayer(sendi, player, tpLoc, worldPlayer, attempts, type));
-            } else {
-                if (worldPlayer.getPlayerInfo().applyCooldown)
-                    getPl().getCooldowns().removeCooldown(player, worldPlayer.getWorld());
-                getPl().getPInfo().getRtping().remove(player);
-            }
+                settings.teleport.sendPlayer(sendi, player, tpLoc, worldPlayer, attempts, type);
         } else {
-            randomlyTeleport(sendi);
-            QueueHandler.remove(loc);
+            if (worldPlayer.getPlayerInfo().applyCooldown)
+                getPl().getCooldowns().removeCooldown(player, worldPlayer.getWorld());
+            getPl().getPInfo().getRtping().remove(player);
         }
     }
 

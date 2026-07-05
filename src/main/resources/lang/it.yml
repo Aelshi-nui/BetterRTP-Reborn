@@ -1,6 +1,6 @@
 # Help translate this file into more languages!
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success:
     Paid: '&aSei stato teletrasportato a&7 x=%x% y=%y% z=%z% in &f%attempts% &7tentativi, pagando &c$%price%&7! '
     Bypass: '&aSei stato teletrasportato a&7 x=%x% y=%y% z=%z%!'
@@ -33,7 +33,7 @@ Messages:
     Set: '&f%type% &aimpostato su &f%value%'
     Remove: '&cRimosso il mondo %world%'
 Help:
-  Prefix: '&e&m-----&6&l BetterRTP &8| Help &e&m-----'
+  Prefix: '&e&m-----&6&l BetterRTPx &8| Help &e&m-----'
   Main: ' &7- &e/%command% &7- Teletrasporto randomico!'
   Biome: ' &7- &e/%command% biome <bioma1, bioma2...> &7- Teletrasporto randomico con bioma scelto da te.'
   Edit: ' &7- &e/%command% edit <default/mondo> [argomenti...] &7- Modifica alcuni settings del plugin.'

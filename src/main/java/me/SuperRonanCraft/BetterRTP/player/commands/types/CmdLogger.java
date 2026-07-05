@@ -6,6 +6,7 @@ import me.SuperRonanCraft.BetterRTP.references.PermissionNode;
 import me.SuperRonanCraft.BetterRTP.references.messages.Message;
 import me.SuperRonanCraft.BetterRTP.references.messages.Message_RTP;
 import me.SuperRonanCraft.BetterRTP.references.web.LogUploader;
+import me.SuperRonanCraft.BetterRTP.versions.AsyncHandler;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -21,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 public class CmdLogger implements RTPCommand {
 
@@ -44,7 +44,7 @@ public class CmdLogger implements RTPCommand {
                 sendi.sendMessage("Execute `" + cmd + " _UPLOAD_`" + " to upload log to https://logs.ronanplugins.com");
             }
         } else {
-            CompletableFuture.runAsync(() -> {
+            AsyncHandler.async(() -> {
                 String key = LogUploader.post(BetterRTP.getInstance().getRtpLogger().getFile());
                 if (key == null) {
                     Message.sms(sendi, new ArrayList<>(Collections.singletonList("&cAn error occured attempting to upload log!")), null);

@@ -69,6 +69,8 @@ public class BetterRTP extends JavaPlugin {
         invs.closeAll();
         queue.unload();
         rtpLogger.unload();
+        pInfo.unloadAll();
+        foliaHandler.get().cancelAllTasks();
     }
 
     private void registerDependencies() {

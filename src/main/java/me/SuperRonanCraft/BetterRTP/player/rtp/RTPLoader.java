@@ -35,6 +35,10 @@ public class RTPLoader {
                             exists.set(true);
                     });
                     if (exists.get()) {
+                        if (!BetterRTP.getInstance().getSettings().isWorldEnabled(world)) {
+                            BetterRTP.debug("[WARN] - Custom World '" + world + "' skipped because it is not in the WorldWhitelist");
+                            continue;
+                        }
                         BetterRTP.debug("Custom World '" + world + "' registered:");
                         customWorlds.put(world, new WorldCustom(Bukkit.getWorld(world)));
                     } else

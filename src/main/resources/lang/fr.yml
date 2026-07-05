@@ -1,7 +1,7 @@
 # Translation author: OasisAkari (GitHub)
 # MAJ author : Nogapra (Github) Nogapra#2800 (Discord)
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success: # # Placeholders! %x% %y% and %z% are the x, y, and z coordinates that the player is being teleported to! #
     Paid: '&aVous avez été téléporté aux coordonnées &7x=%x% y=%y% z=%z% pour un prix de &c$%price%&7!'
     Bypass: '&aVous avez été téléporté aux cooordonées &7x=%x% y=%y% z=%z%!'
@@ -35,7 +35,7 @@ Messages:
     Remove: '&cRetiré ! Vous avez retiré le Monde Custom %world%'
 
 Help:
-  Prefix: '&e&m-----&6&l BetterRTP &8| Aide &e&m-----'
+  Prefix: '&e&m-----&6&l BetterRTPx &8| Aide &e&m-----'
   Main: ' &7- &e/%command% &7- Téléportez vous aléatoirement'
   Biome: ' &7- &e/%command% biome <biome1, biome2...> &7- Téléportez vous aléatoirement parmi ces biomes'
   Edit: ' &7- &e/%command% edit <default/world> [args...] &7- Modifiez quelques paramètres du plugin'

@@ -1,7 +1,8 @@
 main: me.SuperRonanCraft.BetterRTP.BetterRTP
 version: ${project.version}
-name: BetterRTP
+name: BetterRTPx
 author: SuperRonanCraft
+provides: [BetterRTP]
 folia-supported: true #As of 3.6.8 thanks to LOOHP#6007, TechnicallyCoded#9095 and loving11ish#2066
 softdepend:
     - Vault
@@ -22,7 +23,7 @@ softdepend:
     - Pueblos #Respect Pueblos regions (https://www.spigotmc.org/resources/pueblos.91255/) (My Favorite :D)
     # Convince
     - ProtocolLib
-    - Multiverse-Core #Forcing Multiverse to load BEFORE BetterRTP
+    - Multiverse-Core #Forcing Multiverse to load BEFORE BetterRTPx
     - Essentials #adds `/back` support
     - PlaceholderAPI
     - HuskClaims #fixed condition race which breaks hooking

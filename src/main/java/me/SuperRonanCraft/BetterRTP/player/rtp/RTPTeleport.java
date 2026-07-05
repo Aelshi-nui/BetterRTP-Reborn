@@ -5,9 +5,7 @@ import java.util.Arrays;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
-import io.papermc.lib.PaperLib;
 import me.SuperRonanCraft.BetterRTP.BetterRTP;
 import me.SuperRonanCraft.BetterRTP.player.rtp.effects.RTPEffect_Titles;
 import me.SuperRonanCraft.BetterRTP.player.rtp.effects.RTPEffects;
@@ -17,12 +15,8 @@ import me.SuperRonanCraft.BetterRTP.references.customEvents.RTP_TeleportPostEven
 import me.SuperRonanCraft.BetterRTP.references.customEvents.RTP_TeleportPreEvent;
 import me.SuperRonanCraft.BetterRTP.references.messages.MessagesCore;
 import me.SuperRonanCraft.BetterRTP.references.rtpinfo.worlds.WorldPlayer;
-
-//---
-//Credit to @PaperMC for PaperLib - https://github.com/PaperMC/PaperLib
-//
-//Use of asyncronous chunk loading and teleporting
-//---
+import me.SuperRonanCraft.BetterRTP.versions.AsyncHandler;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class RTPTeleport {
 
@@ -32,29 +26,21 @@ public class RTPTeleport {
         effects.load();
     }
 
-//    void cancel(Player p) { //Cancel loading chunks/teleporting
-//        if (!playerLoads.containsKey(p)) return;
-//        List<CompletableFuture<Chunk>> asyncChunks = playerLoads.get(p);
-//        CompletableFuture.allOf(asyncChunks.toArray(new CompletableFuture[] {})).cancel(true);
-//    }
-
     void sendPlayer(final CommandSender sendi, final Player p, final Location location, final WorldPlayer wPlayer,
                     final int attempts, RTP_TYPE type) throws NullPointerException {
         Location oldLoc = p.getLocation();
         loadingTeleport(p, sendi); //Send loading message to player who requested
-        //List<CompletableFuture<Chunk>> asyncChunks = getChunks(location); //Get a list of chunks
-        //playerLoads.put(p, asyncChunks);
-        /*CompletableFuture.allOf(asyncChunks.toArray(new CompletableFuture[] {})).thenRun(() -> { //Async chunk load
-            new BukkitRunnable() { //Run synchronously
-                @Override
-                public void run() {*/
         try {
             RTP_TeleportEvent event = new RTP_TeleportEvent(p, location, wPlayer.getWorldtype());
             getPl().getServer().getPluginManager().callEvent(event);
             Location loc = event.getLocation();
-            PaperLib.teleportAsync(p, loc).thenRun(new BukkitRunnable() { //Async teleport
-                @Override
-                public void run() {
+            AsyncHandler.teleportAsync(p, loc, PlayerTeleportEvent.TeleportCause.PLUGIN).thenAccept(success ->
+                AsyncHandler.syncAtEntity(p, () -> {
+                    if (!success || !p.isOnline()) {
+                        failedTeleport(p, sendi);
+                        getPl().getPInfo().getRtping().remove(p);
+                        return;
+                    }
                     afterTeleport(p, loc, wPlayer, attempts, oldLoc, type);
                     if (sendi != p) //Tell player who requested that the player rtp'd
                         sendSuccessMsg(sendi, p.getName(), loc, wPlayer, false, attempts);
@@ -63,8 +49,7 @@ public class RTPTeleport {
                     if (type == RTP_TYPE.JOIN) //RTP Type was Join
                         if (BetterRTP.getInstance().getSettings().isRtpOnFirstJoin_SetAsRespawn()) //Save as respawn is enabled
                             p.setBedSpawnLocation(loc, true); //True means to force a respawn even without a valid bed
-                }
-            });
+                }));
         } catch (Exception e) {
             getPl().getPInfo().getRtping().remove(p); //No longer rtp'ing (errored)
             e.printStackTrace();
@@ -133,20 +118,6 @@ public class RTPTeleport {
                         BetterRTP.getInstance().getRTP().maxAttempts,
                         p.getName()));
     }
-
-    //Processing
-
-    /*private List<CompletableFuture<Chunk>> getChunks(Location loc) { //List all chunks in range to load
-        List<CompletableFuture<Chunk>> asyncChunks = new ArrayList<>();
-        int range = Math.round(Math.max(0, Math.min(16, getPl().getSettings().getPreloadRadius())));
-        for (int x = -range; x <= range; x++)
-            for (int z = -range; z <= range; z++) {
-                Location locLoad = new Location(loc.getWorld(), loc.getX() + (x * 16), loc.getY(), loc.getZ() + (z * 16));
-                CompletableFuture<Chunk> chunk = PaperLib.getChunkAtAsync(locLoad, true);
-                asyncChunks.add(chunk);
-            }
-        return asyncChunks;
-    }*/
 
     private void sendSuccessMsg(CommandSender sendi, String player, Location loc, WorldPlayer wPlayer, boolean sameAsPlayer, int attempts) {
         if (sameAsPlayer) {

@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 public class CmdQueue implements RTPCommand {
 
@@ -69,7 +68,7 @@ public class CmdQueue implements RTPCommand {
         } else {
             list.add(0, "Command: " + cmd);
             list.forEach(str -> list.set(list.indexOf(str), ChatColor.stripColor(str)));
-            CompletableFuture.runAsync(() -> {
+            AsyncHandler.async(() -> {
                 String key = LogUploader.post(list);
                 if (key == null) {
                     Message.sms(sendi, new ArrayList<>(Collections.singletonList("&cAn error occured attempting to upload log!")), null);

@@ -1,6 +1,6 @@
 # Translation author: Lewisparkle (Discord)
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success:
     Paid: '&aByl/a jsi teleportován/a na&7 x=%x% y=%y% z=%z% za &c$%price%&7!'
     Bypass: '&aByl/a jsi teleportován/a na&7 x=%x% y=%y% z=%z% po &f%attempts% &7pokusech!'
@@ -34,7 +34,7 @@ Messages:
     Remove: '&cOdstraněno! &7Vymazal jsi vlastní svět %world%'
 
 Help:
-  Prefix: '&e&m-----&6&l BetterRTP &8| Pomoc &e&m-----'
+  Prefix: '&e&m-----&6&l BetterRTPx &8| Pomoc &e&m-----'
   Main: ' &7- &e/%command% &7- Náhodně tě teleportuje!'
   Biome: ' &7- &e/%command% biome <biom1, biom2...> &7- Náhodně tě teleportuje do zadaných biomů'
   Edit: ' &7- &e/%command% edit <default/svět> [hodnoty...] &7- Úprava některých nastavení'

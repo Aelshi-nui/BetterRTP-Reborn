@@ -1,6 +1,6 @@
 # Translation author: OasisAkari (GitHub), Kamiya (GitHub)
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success: ## Placeholders! %x% %y% 和 %z% 是玩家要被傳送到的對應 x y z 座標! #
     Paid: '&a您花費了&c$%price%&7，被傳送到了&7 x=%x% y=%y% z=%z%。一共嘗試&f%attempts%&7次！'
     Bypass: '&a您被傳送到了&7 x=%x% y=%y% z=%z%。一共嘗試&f%attempts%&7次！'
@@ -34,7 +34,7 @@ Messages:
     Remove: '&c已刪除！&7你刪除了自訂義世界 %world%。'
 
 Help:
-  Prefix: '&e&m-----&6&l BetterRTP &8| 幫助 &e&m-----'
+  Prefix: '&e&m-----&6&l BetterRTPx &8| 幫助 &e&m-----'
   Main: ' &7- &e/%command% &7- 把您隨機傳送。'
   Biome: ' &7- &e/%command% biome <生態域1, 生態域2...> &7- 在這些指定的生態域中隨機傳送。'
   Edit: ' &7- &e/%command% edit <default/world> [參數...] &7- 編輯插件設定。'

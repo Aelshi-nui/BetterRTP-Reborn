@@ -1,6 +1,6 @@
 package me.SuperRonanCraft.BetterRTP.player;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -11,12 +11,12 @@ import me.SuperRonanCraft.BetterRTP.references.invs.RTP_INV_SETTINGS;
 
 public class PlayerInfo {
 
-    private final HashMap<Player, Inventory> invs = new HashMap<>();
+    private final ConcurrentHashMap<Player, Inventory> invs = new ConcurrentHashMap<>();
     //private final HashMap<Player, RTP_INV_SETTINGS> invType = new HashMap<>();
-    @Getter private final HashMap<Player, World> invWorld = new HashMap<>();
-    @Getter private final HashMap<Player, RTP_INV_SETTINGS> invNextInv = new HashMap<>();
+    @Getter private final ConcurrentHashMap<Player, World> invWorld = new ConcurrentHashMap<>();
+    @Getter private final ConcurrentHashMap<Player, RTP_INV_SETTINGS> invNextInv = new ConcurrentHashMap<>();
     //private final HashMap<Player, CooldownData> cooldown = new HashMap<>();
-    @Getter private final HashMap<Player, Boolean> rtping = new HashMap<>();
+    @Getter private final ConcurrentHashMap<Player, Boolean> rtping = new ConcurrentHashMap<>();
     //private final HashMap<Player, List<Location>> previousLocations = new HashMap<>();
     //private final HashMap<Player, RTP_TYPE> rtpType = new HashMap<>();
 
@@ -42,7 +42,7 @@ public class PlayerInfo {
         return invs.containsKey(p);
     }
 
-    private void unloadAll() {
+    public void unloadAll() {
         invs.clear();
         //invType.clear();
         invWorld.clear();
@@ -52,7 +52,7 @@ public class PlayerInfo {
         //previousLocations.clear();
     }
 
-    private void unload(Player p) {
+    public void unload(Player p) {
         clearInvs(p);
         //cooldown.remove(p);
         rtping.remove(p);

@@ -1,35 +1,49 @@
-<p align="center">
-  <b><a>Welcome to BetterRTP's repository!</a></b>
-</p>
+# BetterRTPx
 
-## Where's the Lang files?/Want to Contribute translating?  
-All language files are located [here](src/main/resources/lang)
-feel free to fork one of the language files and help translate!
+BetterRTPx is the BetterRTP Reborn fork focused on current Paper, Purpur, and Folia servers.
 
-## Libraries
-BetterRTP uses and is compiled with the following libraries:
+This fork keeps the original BetterRTP command and permission surface where practical, while modernizing the runtime internals for safer scheduling, better performance, and newer Minecraft compatibility.
 
-- [ParticleLib](https://github.com/ByteZ1337/ParticleLib) (included) - Particles library by ByteZ1337. Find all supported particles [here](https://github.com/ByteZ1337/ParticleLib/blob/master/src/main/java/xyz/xenondevs/particle/ParticleEffect.java)
-- [PaperLib](https://github.com/PaperMC/PaperLib) (included) - Library for interfacing with PaperMC specific APIs, used for async chunk loading.
-- [FoliaLib](https://github.com/TechnicallyCoded/FoliaLib) (included) - Library for interfacing with Folia specific APIs, used for cross-platform timers.
+## Recent Update
 
-## Build instructions on Ubuntu
+- Added Folia-safe scheduler wrappers for async, entity, and location work.
+- Moved RTP safe-location checks and teleport completion onto Folia-compatible schedulers.
+- Fixed first-join RTP timing with a configurable join delay.
+- Added optional world whitelist support.
+- Fixed SQL cooldown table handling for world names with spaces.
+- Fixed queue circle-distance math and a world Z-coordinate validation bug.
+- Improved random coordinate generation and world height handling.
+- Reduced stuck RTP state after cancelled or failed searches.
+- Cleared player RTP/cooldown state on player unload and plugin disable.
+- Hardened cooldown loading and shared player data against async access races.
+- Skipped invalid configured sound names instead of throwing runtime errors.
+- Updated Maven dependencies and repository configuration for modern Java builds.
 
-mvn clean install
+## Compatibility
 
-The file will be in the Target file.
+- Java 21 runtime supported.
+- Paper and Purpur supported.
+- Folia support is included through FoliaLib.
+- The plugin is published as `BetterRTPx` and declares `provides: [BetterRTP]` for compatibility with integrations that still look for the original plugin name.
 
-## Where's the Wiki?  
-The wiki is available [here](../../wiki)!
-    
-<p align="center">
-  <b>Chat with us on Discord</b><br/>
-  <a href="https://discord.gg/8Kt4wKm"><img src="https://img.shields.io/discord/182633513474850818.svg?longCache=true&style=flat-square&label=Discord" alt="Discord" /></a><br/>
-  <b>Have a Suggestion? Make an issue!</b><br/>
-  <a href="../../issues"><img src="https://img.shields.io/github/issues-raw/SuperRonanCraft/BetterRTP.svg?longCache=true&style=flat-square&label=Issues" alt="GitHub issues" /></a><br/>
-  <br/>
-  <a href="https://www.spigotmc.org/resources/36081/">Thank you for viewing the Wiki for BetterRTP!</a><br/>
-  <i><a>Did this wiki help you out? Please give it a <b>Star</b> so I know it's getting use!</a></i><br/>
-  <br/>
-  <b><i><a href="https://www.spigotmc.org/resources/authors/superronancraft.13025/">Check out my other plugins!</a></i></b>
-</p>
+## Commands And Permissions
+
+The main command remains:
+
+```text
+/betterrtp
+```
+
+Existing aliases such as `/rtp`, `/wild`, and `/randomtp` remain available. Existing `betterrtp.*` permission nodes are preserved for compatibility.
+
+## Build
+
+```bash
+mvn clean package
+```
+
+The compiled plugin jar is written to `target/`.
+
+## Wiki
+
+The wiki is available from this repository's GitHub wiki.

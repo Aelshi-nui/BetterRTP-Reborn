@@ -1,6 +1,6 @@
 # Translation author: zFoxy#1717 (Discord) and Arqui9897 Small update to bring it into line with the latest English language file.
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success: # # ¡Placeholders! ¡%x% %y% y %z% son las coordinadas x, y, y z al que el jugador está siendo teletransportado! #
     Paid: '&a¡Has sido teletransportado a&7 x=%x% y=%y% z=%z% por &c$%price%&7!'
     Bypass: '&aHas sido teletransportado a&7 x=%x% y=%y% z=%z%'
@@ -15,7 +15,7 @@ Messages:
     NotSafe: '&c¡No se pudo encontrar un lugar seguro en %attempts% intentos! &7¡%player% no fue teletransportado aleatoriamente!'
     Biome: '&c¡Parece que el bioma&7 %biome%&c no existe! &7¡Intenta usar la lista del tab!'
   Reload: '&e¡Configuración recargada exitosamente!'
-  Update: '&7Actualmente hay una actualización para &6BetterRTP &7versión &e#%newVersion% &7 tu tienes la versión &e#%currentVersion%'
+  Update: '&7Actualmente hay una actualización para &6BetterRTPx &7versión &e#%newVersion% &7 tu tienes la versión &e#%currentVersion%'
   NoPermission:
     Basic: '&c¡Lo siento! &7¡No tienes permiso para usar este comando! &8Permission: %permission%'
     World: '&c¡Lo siento! &7¡No tienes permitido teletransportarte aleatoriamente en el mundo %world%! &8Permission: %permission%'
@@ -35,7 +35,7 @@ Messages:
     Remove: '&c¡Eliminado! &7Has eliminado el Mundo Personalizado %world%'
 
 Help:
-  Prefix: '&e&m-----&6&l BetterRTP &8| Ayuda &e&m-----'
+  Prefix: '&e&m-----&6&l BetterRTPx &8| Ayuda &e&m-----'
   Main: ' &7- &e/%command% &7- ¡Te teletransporta aleatoriamente!'
   Biome: ' &7- &e/%command% biome <bioma1, bioma2...> &7- Teletransporte aleatorio dentro de estos biomas'
   Edit: ' &7- &e/%command% edit <default/world> [args...] &7- Editar algunos ajustes del plugin'

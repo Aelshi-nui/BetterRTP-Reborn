@@ -1,16 +1,15 @@
 package me.SuperRonanCraft.BetterRTP.references.rtpinfo;
 
-import io.papermc.lib.PaperLib;
 import me.SuperRonanCraft.BetterRTP.BetterRTP;
 import me.SuperRonanCraft.BetterRTP.references.rtpinfo.worlds.RTPWorld;
 import me.SuperRonanCraft.BetterRTP.references.rtpinfo.worlds.WORLD_TYPE;
+import me.SuperRonanCraft.BetterRTP.versions.AsyncHandler;
 import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomLocation {
 
@@ -28,25 +27,28 @@ public class RandomLocation {
         //Generate a random X and Z based off the quadrant selected
         int min = rtpWorld.getMinRadius();
         int max = rtpWorld.getMaxRadius() - min;
+        if (max < 0)
+            return null;
         int x, z;
-        int quadrant = new Random().nextInt(4);
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        int quadrant = random.nextInt(4);
         try {
             switch (quadrant) {
                 case 0: // Positive X and Z
-                    x = new Random().nextInt(max) + min;
-                    z = new Random().nextInt(max) + min;
+                    x = random.nextInt(max + 1) + min;
+                    z = random.nextInt(max + 1) + min;
                     break;
                 case 1: // Negative X and Z
-                    x = -new Random().nextInt(max) - min;
-                    z = -(new Random().nextInt(max) + min);
+                    x = -random.nextInt(max + 1) - min;
+                    z = -(random.nextInt(max + 1) + min);
                     break;
                 case 2: // Negative X and Positive Z
-                    x = -new Random().nextInt(max) - min;
-                    z = new Random().nextInt(max) + min;
+                    x = -random.nextInt(max + 1) - min;
+                    z = random.nextInt(max + 1) + min;
                     break;
                 default: // Positive X and Negative Z
-                    x = new Random().nextInt(max) + min;
-                    z = -(new Random().nextInt(max) + min);
+                    x = random.nextInt(max + 1) + min;
+                    z = -(random.nextInt(max + 1) + min);
                     break;
             }
         } catch (IllegalArgumentException e) {
@@ -64,24 +66,29 @@ public class RandomLocation {
     private static Location generateRound(RTPWorld rtpWorld) {
         //Generate a random X and Z based off location on a spiral curve
         int min = rtpWorld.getMinRadius();
-        int max = rtpWorld.getMaxRadius() - min;
+        int max = rtpWorld.getMaxRadius();
+        if (max < min)
+            return null;
         int x, z;
-
-        double area = Math.PI * (max - min) * (max + min); //of all the area in this donut
-        double subArea = area * new Random().nextDouble(); //pick a random subset of that area
-
-        double r = Math.sqrt(subArea/Math.PI + min * min); //convert area to radius
-        double theta = (r - (int) r) * 2 * Math.PI; //use the remainder as an angle
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        double radius = Math.sqrt(random.nextDouble(min * min, (max * max) + 1.0D));
+        double theta = random.nextDouble(0, Math.PI * 2);
 
         // polar to cartesian
-        x = (int) (r * Math.cos(theta));
-        z = (int) (r * Math.sin(theta));
+        x = (int) (radius * Math.cos(theta));
+        z = (int) (radius * Math.sin(theta));
         x += rtpWorld.getCenterX();
         z += rtpWorld.getCenterZ();
         return new Location(rtpWorld.getWorld(), x, 69, z);
     }
 
     public static Location getSafeLocation(WORLD_TYPE type, World world, Location loc, int minY, int maxY, List<String> biomes) {
+        if (world == null || loc == null)
+            return null;
+        minY = Math.max(minY, getWorldMinHeight(world));
+        maxY = Math.min(maxY, world.getMaxHeight() - 1);
+        if (minY >= maxY)
+            return null;
         switch (type) { //Get a Y position and check for bad blocks
             case NETHER: return getLocAtNether(loc.getBlockX(), loc.getBlockZ(), minY, maxY, world, biomes);
             case NORMAL:
@@ -107,9 +114,17 @@ public class RandomLocation {
 
     public static Block getHighestBlock(int x, int z, World world) {
         Block b = world.getHighestBlockAt(x, z);
-        if (b.getType().toString().endsWith("AIR")) //1.15.1 or less
+        if (b.getType().toString().endsWith("AIR") && b.getY() > getWorldMinHeight(world)) //1.15.1 or less
             b = world.getBlockAt(x, b.getY() - 1, z);
         return b;
+    }
+
+    private static int getWorldMinHeight(World world) {
+        try {
+            return (int) World.class.getMethod("getMinHeight").invoke(world);
+        } catch (ReflectiveOperationException ignored) {
+            return 0;
+        }
     }
 
     private static Location getLocAtNether(int x, int z, int minY, int maxY, World world, List<String> biomes) {
@@ -167,9 +182,10 @@ public class RandomLocation {
     }
 
     private static void cacheChunkAt(World world, int goal, int start, int xat, int zat) {
-        CompletableFuture<Chunk> task = PaperLib.getChunkAtAsync(new Location(world, xat * 16, 0, zat * 16));
-        task.thenAccept(chunk -> {
+        Location location = new Location(world, xat * 16, 0, zat * 16);
+        AsyncHandler.syncAtLocation(location, () -> {
             try {
+                Chunk chunk = location.getChunk();
                 ChunkSnapshot snapshot = chunk.getChunkSnapshot(true, true, false);
                 int maxy = snapshot.getHighestBlockYAt(8, 8);
                 Biome biome = snapshot.getBiome(8, 8);
@@ -180,7 +196,8 @@ public class RandomLocation {
                 throw new RuntimeException();
                 //BetterRTP.getInstance().getLogger().info("Tried Adding " + chunk.getX() + " " + chunk.getZ());
             }
-        }).thenRun(() -> cacheTask(world, goal, start, xat, zat));
+            cacheTask(world, goal, start, xat, zat);
+        });
     }
 
 }

@@ -1,6 +1,6 @@
 # Vietnamese, Translated by Vo Chi Danh, Discord is VoChiDanh#0862
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success:
     Paid: '&aBạn đã được dịch chuyển tới &7 x=%x% y=%y% z=%z% với giá &c$%price%&7 trong &f%attempts% &7lần!'
     Bypass: '&aBạn đã được dịch chuyển tới&7 x=%x% y=%y% z=%z% trong &f%attempts% &7lần'
@@ -33,7 +33,7 @@ Messages:
     Set: '&bThành công! &7%type% đặt thành %value%'
     Remove: '&cLoại bỏ! &7Bạn đã loại bỏ world %world%'
 Help:
-  Prefix: '&e&m-----&6&l BetterRTP &8| Help &e&m-----'
+  Prefix: '&e&m-----&6&l BetterRTPx &8| Help &e&m-----'
   Main: ' &7- &e/%command% &7- Dịch chuyển ngẫu nhiên!'
   Biome: ' &7- &e/%command% biome <quần xã 1, quần xã 2,......> &7- Dịch chuyển một cách ngẫu nhiên những quần xã sinh vật này'
   Edit: ' &7- &e/%command% edit <default/world> [args...] &7- Chỉnh sửa một số cài đặt plugin'

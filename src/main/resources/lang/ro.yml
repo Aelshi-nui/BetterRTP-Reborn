@@ -1,5 +1,5 @@
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success: ## PlaceHolder-ele! %x% %y% si %z% sunt x, y, si z coordonatelor ce apare player-ilor! #
     Paid: '&aAi fost teleportat la coordonatele &7 x=%x% y=%y% z=%z% pentru &c$%price%&7!'
     Bypass: '&aAi fost teleportat la coordonatele &7 x=%x% y=%y% z=%z%'
@@ -33,7 +33,7 @@ Messages:
     Remove: '&cSters! &7Ai sters lumea custom %world%'
 
 Help:
-  Prefix: '&e&m-----&6&l BetterRTP &8| Ajutor &e&m-----'
+  Prefix: '&e&m-----&6&l BetterRTPx &8| Ajutor &e&m-----'
   Main: ' &7- &e/%command% &7- Te teleporteaza random!'
   Biome: ' &7- &e/%command% biome <biome1, biome2...> &7- Te teleporteaza random intre aceste biome-uri'
   Edit: ' &7- &e/%command% edit <default/world> [args...] &7- Editeaza niste setari ale plugin-ului'

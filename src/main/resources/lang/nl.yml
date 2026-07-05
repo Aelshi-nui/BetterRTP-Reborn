@@ -1,6 +1,6 @@
 # Translation author: QuestalNetwork (Spigot) and GeleVla (GitHub)
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success: # # Placeholders! %x% %y% and %z% are the x, y, and z coordinates that the player is being teleported to! #
     Paid: '&aJe bent random geteleporteerd naar&7 x=%x% y=%y% z=%z% voor &c$%price%&7!'
     Bypass: '&aJe bent random geteleporteerd naar&7 x=%x% y=%y% z=%z%'
@@ -34,7 +34,7 @@ Messages:
     Remove: '&cVerwijderd! &7Je verwijderde de aangepaste wereld %world%'
 
 Help:
-  Prefix: '&e&m-----&6&l BetterRTP &8| Help &e&m-----'
+  Prefix: '&e&m-----&6&l BetterRTPx &8| Help &e&m-----'
   Main: ' &7- &e/%command% &7- Randomly teleports you!'
   Biome: ' &7- &e/%command% biome <biome1, biome2...> &7- Randomly teleport withing these biomes'
   Edit: ' &7- &e/%command% edit <default/world> [args...] &7- Edit some plugin settings'

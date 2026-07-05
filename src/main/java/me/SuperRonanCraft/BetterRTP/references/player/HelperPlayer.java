@@ -12,6 +12,7 @@ public class HelperPlayer {
 
     public static void unload(Player p) {
         getPl().getPlayerDataManager().clear(p);
+        getPl().getPInfo().unload(p);
     }
 
     private static BetterRTP getPl() {

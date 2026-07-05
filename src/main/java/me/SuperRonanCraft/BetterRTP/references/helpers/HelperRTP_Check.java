@@ -26,6 +26,9 @@ public class HelperRTP_Check {
         if (getPl().getRTP().getDisabledWorlds().contains(pWorld.getWorld().getName())) {
             return RTP_ERROR_REQUEST_REASON.WORLD_DISABLED;
         }
+        if (!getPl().getSettings().isWorldEnabled(pWorld.getWorld().getName())) {
+            return RTP_ERROR_REQUEST_REASON.WORLD_DISABLED;
+        }
         if (rtpInfo.isCheckCooldown() && isCoolingDown(player, pWorld)) { //Is Cooling down
             return RTP_ERROR_REQUEST_REASON.COOLDOWN;
         }

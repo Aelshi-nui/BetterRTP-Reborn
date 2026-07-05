@@ -1,6 +1,6 @@
 # Translation author: Farum (Discord), teksusik
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success:
     Paid: '&aZostałeś przeniesiony do&7 x=%x% y=%y% z=%z% za &c$%price%&7!'
     Bypass: '&aZostałeś przeniesiony do&7 x=%x% y=%y% z=%z%'
@@ -34,7 +34,7 @@ Messages:
     Remove: '&cUsunięto! &7Usunąłeś niestandardowy świat %world%'
 
 Help:
-  Prefix: '&e&m-----&6&l BetterRTP &8| Pomoc &e&m-----'
+  Prefix: '&e&m-----&6&l BetterRTPx &8| Pomoc &e&m-----'
   Main: ' &7- &e/%command% &7- Wkonuje losową teleportację!'
   Biome: ' &7- &e/%command% biome <biome1, biome2...> &7- Losowo teleportuje do któregoś z biomów'
   Edit: ' &7- &e/%command% edit <default/world> [args...] &7- Edytuje niektóre ustawienia pluginu'

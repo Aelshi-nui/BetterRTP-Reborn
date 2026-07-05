@@ -1,6 +1,6 @@
 # Translation author: OasisAkari (GitHub)
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success: ## Placeholders! %x% %y% and %z% are the x, y, and z coordinates that the player is being teleported to! #
     Paid: '&a你花费了&c$%price%&7，被传送到了&7 x=%x% y=%y% z=%z%。共尝试&f%attempts%&7次！'
     Bypass: '&a你被传送到了&7 x=%x% y=%y% z=%z%。共尝试&f%attempts%&7次！'
@@ -34,7 +34,7 @@ Messages:
     Remove: '&c已移除，&7你移除了自定义世界%world%。'
 
 Help:
-  Prefix: '&e&m-----&6&l BetterRTP &8| 帮助菜单 &e&m-----'
+  Prefix: '&e&m-----&6&l BetterRTPx &8| 帮助菜单 &e&m-----'
   Main: ' &7- &e/%command% &7- 将你随机传送！'
   Biome: ' &7- &e/%command% biome <生物群系1, 生物群系2...> &7- 在这些指定的群系中随机传送。'
   Edit: ' &7- &e/%command% edit <默认/世界> [参数...] &7- 修改插件设置。'

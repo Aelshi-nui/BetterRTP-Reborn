@@ -3,6 +3,10 @@ package me.SuperRonanCraft.BetterRTP.references.settings;
 import lombok.Getter;
 import me.SuperRonanCraft.BetterRTP.references.file.FileOther;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 public class Settings {
 
     @Getter private boolean debug;
@@ -10,6 +14,7 @@ public class Settings {
     @Getter private int delayTime;
     @Getter private boolean rtpOnFirstJoin_Enabled;
     @Getter private String rtpOnFirstJoin_World;
+    @Getter private long rtpOnFirstJoin_DelayTicks;
     @Getter private boolean rtpOnFirstJoin_SetAsRespawn;
     @Getter private boolean statusMessages; //Send more information about rtp
     @Getter private int preloadRadius; //Amount of chunks to load around a safe rtp location (clamped (0 - 16))
@@ -22,6 +27,8 @@ public class Settings {
     @Getter private boolean useLocationsInSameWorld;
     @Getter private boolean permissionGroupEnabled;
     @Getter private boolean queueEnabled;
+    @Getter private boolean worldWhitelistEnabled;
+    private final List<String> worldWhitelist = new ArrayList<>();
     //Placeholders
     @Getter private String placeholder_true;
     @Getter private String placeholder_nopermission;
@@ -45,11 +52,16 @@ public class Settings {
         delayTime = config.getInt("Settings.Delay.Time");
         rtpOnFirstJoin_Enabled = config.getBoolean("Settings.RtpOnFirstJoin.Enabled");
         rtpOnFirstJoin_World = config.getString("Settings.RtpOnFirstJoin.World");
+        rtpOnFirstJoin_DelayTicks = Math.max(1L, config.getLong("Settings.RtpOnFirstJoin.DelayTicks"));
         rtpOnFirstJoin_SetAsRespawn = config.getBoolean("Settings.RtpOnFirstJoin.SetAsRespawn");
         preloadRadius = config.getInt("Settings.PreloadRadius");
         statusMessages = config.getBoolean("Settings.StatusMessages");
         permissionGroupEnabled = config.getBoolean("PermissionGroup.Enabled");
         queueEnabled = config.getBoolean("Settings.Queue.Enabled");
+        worldWhitelistEnabled = config.getBoolean("Settings.WorldWhitelist.Enabled");
+        worldWhitelist.clear();
+        for (String world : config.getStringList("Settings.WorldWhitelist.Worlds"))
+            worldWhitelist.add(world.toLowerCase(Locale.ROOT));
         protocolLibSounds = FileOther.FILETYPE.EFFECTS.getBoolean("Sounds.ProtocolLibSound");
         locationEnabled = FileOther.FILETYPE.LOCATIONS.getBoolean("Enabled");
         useLocationIfAvailable = FileOther.FILETYPE.LOCATIONS.getBoolean("UseLocationIfAvailable");
@@ -70,6 +82,10 @@ public class Settings {
         placeholder_timeSeparator_middle = FileOther.FILETYPE.PLACEHOLDERS.getString("Config.TimeFormat.Separator.Middle");
         placeholder_timeSeparator_last = FileOther.FILETYPE.PLACEHOLDERS.getString("Config.TimeFormat.Separator.Last");
         depends.load();
+    }
+
+    public boolean isWorldEnabled(String worldName) {
+        return !worldWhitelistEnabled || worldWhitelist.contains(worldName.toLowerCase(Locale.ROOT));
     }
 
     public SoftDepends getsDepends() {

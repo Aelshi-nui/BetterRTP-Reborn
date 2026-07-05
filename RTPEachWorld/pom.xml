@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.SuperRonanCraft</groupId>
-    <artifactId>BetterRTP-EachWorld</artifactId>
+    <artifactId>BetterRTPx-EachWorld</artifactId>
     <packaging>jar</packaging>
     <version>3.4.2-1</version>
 
@@ -16,6 +16,7 @@
     </properties>
 
     <build>
+        <sourceDirectory>src</sourceDirectory>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -45,8 +46,8 @@
         </dependency>
         <dependency>
             <groupId>me.SuperRonanCraft</groupId>
-            <artifactId>BetterRTP</artifactId>
-            <version>3.4.2-1</version>
+            <artifactId>BetterRTPx</artifactId>
+            <version>3.6.13</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

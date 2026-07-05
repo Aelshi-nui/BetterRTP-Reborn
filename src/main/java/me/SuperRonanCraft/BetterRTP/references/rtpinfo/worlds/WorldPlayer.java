@@ -110,7 +110,7 @@ public class WorldPlayer implements RTPWorld, RTPWorld_Defaulted {
         int _zLMin = rtpWorld.getCenterZ() - rtpWorld.getMinRadius(); //|I-||
         int _zRMax = rtpWorld.getCenterZ() + rtpWorld.getMaxRadius(); //||-|I
         int _zRMin = rtpWorld.getCenterZ() + rtpWorld.getMinRadius(); //||-I|
-        int _zLoc = loc.getBlockX();
+        int _zLoc = loc.getBlockZ();
         return _zLoc >= _zLMax && (_zLoc <= _zLMin || _zLoc >= _zRMin) && _zLoc <= _zRMax;
     }
 

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -34,6 +33,7 @@ import me.SuperRonanCraft.BetterRTP.references.rtpinfo.QueueHandler;
 import me.SuperRonanCraft.BetterRTP.references.rtpinfo.worlds.WorldDefault;
 import me.SuperRonanCraft.BetterRTP.references.rtpinfo.worlds.WorldPlayer;
 import me.SuperRonanCraft.BetterRTP.references.web.LogUploader;
+import me.SuperRonanCraft.BetterRTP.versions.AsyncHandler;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -157,7 +157,7 @@ public class CmdInfo implements RTPCommand, RTPCommandHelpable {
         } else {
             list.add(0, "Command: " + cmd);
             list.forEach(str -> list.set(list.indexOf(str), ChatColor.stripColor(str)));
-            CompletableFuture.runAsync(() -> {
+            AsyncHandler.async(() -> {
                 String key = LogUploader.post(list);
                 if (key == null) {
                     Message.sms(sendi, new ArrayList<>(Collections.singletonList("&cAn error occured attempting to upload log!")), null);

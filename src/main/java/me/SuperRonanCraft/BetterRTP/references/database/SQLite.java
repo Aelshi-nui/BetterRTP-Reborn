@@ -76,7 +76,7 @@ public abstract class SQLite {
                             String _name = getColumnName(type, c);
                             String _type = getColumnType(type, c);
                             //System.out.println("Adding " + _name);
-                            s.executeUpdate(addMissingColumns.replace("%table%", table).replace("%column%", _name).replace("%type%", _type));
+                            s.executeUpdate(addMissingColumns.replace("%table%", quoteIdentifier(table)).replace("%column%", quoteIdentifier(_name)).replace("%type%", _type));
                         } catch (SQLException e) {
                             //e.printStackTrace();
                         }
@@ -101,12 +101,12 @@ public abstract class SQLite {
     }
 
     private String getCreateTable(String table) {
-        String str = "CREATE TABLE IF NOT EXISTS `" + table + "` (";
+        String str = "CREATE TABLE IF NOT EXISTS " + quoteIdentifier(table) + " (";
         Enum<?>[] columns = getColumns(type);
         for (Enum<?> c : columns) {
             String _name = getColumnName(type, c);
             String _type = getColumnType(type, c);
-            str = str.concat("`" + _name + "` " + _type);
+            str = str.concat(quoteIdentifier(_name) + " " + _type);
             if (c.equals(columns[columns.length - 1]))
                 str = str.concat(")");
             else
@@ -211,7 +211,7 @@ public abstract class SQLite {
         ResultSet rs = null;
         try {
             conn = getSQLConnection();
-            ps = conn.prepareStatement("SELECT * FROM " + tables.get(0) + " WHERE " + getColumnName(type, getColumns(type)[0]) + " = 0");
+            ps = conn.prepareStatement("SELECT * FROM " + quoteIdentifier(tables.get(0)) + " WHERE " + quoteIdentifier(getColumnName(type, getColumns(type)[0])) + " = 0");
 
             rs = ps.executeQuery();
         } catch (SQLException ex) {
@@ -223,12 +223,16 @@ public abstract class SQLite {
 
     protected void close(PreparedStatement ps, ResultSet rs, Connection conn) {
         try {
+            if (rs != null) rs.close();
             if (ps != null) ps.close();
             if (conn != null) conn.close();
-            if (rs != null) rs.close();
         } catch (SQLException ex) {
             Error.close(BetterRTP.getInstance(), ex);
         }
+    }
+
+    protected static String quoteIdentifier(String identifier) {
+        return "`" + identifier.replace("`", "``") + "`";
     }
 
     public boolean isLoaded() {

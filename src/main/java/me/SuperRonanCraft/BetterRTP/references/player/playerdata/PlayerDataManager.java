@@ -4,12 +4,12 @@ import lombok.NonNull;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerDataManager {
 
-    private final HashMap<Player, PlayerData> playerData = new HashMap<>();
+    private final ConcurrentHashMap<Player, PlayerData> playerData = new ConcurrentHashMap<>();
 
     public PlayerData getData(@NonNull Player p) {
         if (!playerData.containsKey(p))

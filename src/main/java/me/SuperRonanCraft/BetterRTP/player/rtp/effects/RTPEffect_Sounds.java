@@ -10,10 +10,14 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class RTPEffect_Sounds {
 
     private boolean enabled;
     private String soundTeleport, soundDelay;
+    private final Set<String> warnedSounds = new HashSet<>();
 
     void load() {
         FileOther.FILETYPE config = FileOther.FILETYPE.EFFECTS;
@@ -42,6 +46,9 @@ public class RTPEffect_Sounds {
     }
 
     void playSound(Location loc, Player p, String sound) {
+        Sound bukkitSound = getSound(sound);
+        if (bukkitSound == null)
+            return;
         if (BetterRTP.getInstance().getSettings().isProtocolLibSounds()) {
             try {
                 ProtocolManager pm = ProtocolLibrary.getProtocolManager();
@@ -53,17 +60,18 @@ public class RTPEffect_Sounds {
                 packet.sendPacket(p);
             } catch (NoClassDefFoundError | Exception e) {
                 BetterRTP.getInstance().getLogger().severe("ProtocolLib Sounds is enabled in the effects.yml file, but no ProtocolLib plugin was found!");
-                p.playSound(p.getLocation(), getSound(sound), 1F, 1F);
+                p.playSound(p.getLocation(), bukkitSound, 1F, 1F);
             }
         } else
-            p.playSound(p.getLocation(), getSound(sound), 1F, 1F);
+            p.playSound(p.getLocation(), bukkitSound, 1F, 1F);
     }
 
     private Sound getSound(String sound) {
         try {
             return Sound.valueOf(sound.toUpperCase());
         } catch (IllegalArgumentException e) {
-            BetterRTP.getInstance().getLogger().info("The sound '" + sound + "' is invalid!");
+            if (warnedSounds.add(sound.toUpperCase()))
+                BetterRTP.getInstance().getLogger().warning("The sound '" + sound + "' is invalid for this server version and will be skipped.");
             return null;
         }
     }

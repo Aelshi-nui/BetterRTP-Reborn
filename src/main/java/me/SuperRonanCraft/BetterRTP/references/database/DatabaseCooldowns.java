@@ -33,14 +33,11 @@ public class DatabaseCooldowns extends SQLite {
         List<String> disabledWorlds = BetterRTP.getInstance().getRTP().getDisabledWorlds();
         if (disabledWorlds == null) disabledWorlds = new ArrayList<>();
 
-        // If there are disabled worlds, iterate through the loaded worlds on the server and
-        // add the world name to the list of table names if they aren't marked as disabled
+        // Iterate through loaded worlds and add table names for RTP-enabled worlds.
         List<World> worlds = Bukkit.getWorlds();
-        if (!disabledWorlds.isEmpty()) {
-            for (World world : worlds) {
-                if (!disabledWorlds.contains(world.getName()))
-                    list.add(world.getName());
-            }
+        for (World world : worlds) {
+            if (!disabledWorlds.contains(world.getName()) && BetterRTP.getInstance().getSettings().isWorldEnabled(world.getName()))
+                list.add(world.getName());
         }
 
         return list;
@@ -65,8 +62,8 @@ public class DatabaseCooldowns extends SQLite {
     public void removePlayer(UUID uuid, World world) {
         // Create SQL query string with backtick-ed table name to allow for special characters
         String sql = String.format(
-                "DELETE FROM `%s` WHERE %s = ?",
-                world.getName(),
+                "DELETE FROM %s WHERE %s = ?",
+                quoteIdentifier(world.getName()),
                 COLUMNS.UUID.name
         );
         List<Object> params = new ArrayList<Object>() {{
@@ -83,8 +80,8 @@ public class DatabaseCooldowns extends SQLite {
             conn = getSQLConnection();
             // Create prepared statement with backtick-ed table name to allow for special characters
             ps = conn.prepareStatement(String.format(
-                    "SELECT * FROM `%s` WHERE %s = ?",
-                    world.getName(),
+                    "SELECT * FROM %s WHERE %s = ?",
+                    quoteIdentifier(world.getName()),
                     COLUMNS.UUID.name
             ));
             ps.setString(1, uuid.toString());
@@ -106,7 +103,7 @@ public class DatabaseCooldowns extends SQLite {
     //Set a player Cooldown
     public void setCooldown(World world, CooldownData data) {
         String pre = "INSERT OR REPLACE INTO ";
-        String sql = pre + world.getName() + " ("
+        String sql = pre + quoteIdentifier(world.getName()) + " ("
                 + COLUMNS.UUID.name + ", "
                 + COLUMNS.COOLDOWN_DATE.name + " "
                 //+ COLUMNS.USES.name + " "

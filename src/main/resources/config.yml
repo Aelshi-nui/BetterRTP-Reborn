@@ -1,4 +1,4 @@
-# BetterRTP plugin by SuperRonanCraft! (Join my Public Server at ronanplugins.com) #
+# BetterRTPx plugin by SuperRonanCraft! (Join my Public Server at ronanplugins.com) #
 # Need help? go to https://ronanplugins.com/discord! #
 
 Language-File: 'en.yml'
@@ -46,11 +46,12 @@ Settings:
   Debugger: false
   ## Amount of chunks to preload around a safe location
   PreloadRadius: 5
-  ## Maximum amount of tries before BetterRTP gives up and sends a NotSafeMessage #
+  ## Maximum amount of tries before BetterRTPx gives up and sends a NotSafeMessage #
   MaxAttempts: 32
   RtpOnFirstJoin: # Will execute as console to override delays
     Enabled: false # Make the player rtp when joining the server for the first time
     World: 'world' # World to first rtp in
+    DelayTicks: 20 # Wait this many ticks after join before starting the first join RTP
     SetAsRespawn: false # Save this first rtp as players new spawn point
   Cooldown:
     Enabled: true # Enabled or disabled cooldown timer
@@ -64,6 +65,12 @@ Settings:
     CancelOnMove: true
   Queue:
     Enabled: true #Allows betterrtp to automatically queue up safe rtp locations prior to players executing `/rtp`
+  WorldWhitelist:
+    Enabled: false # Only allow BetterRTPx in the worlds listed below
+    Worlds:
+      - world
+      - world_nether
+      - world_the_end
   DisableUpdater: false
   Logger:
     Enabled: true #Log all things rtp related to the log.log file
@@ -85,7 +92,7 @@ Default:
   MinY: 0
   RTPOnDeath: false
 
-## Blocks BetterRTP will NOT teleport onto. More Blocks at: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html #
+## Blocks BetterRTPx will NOT teleport onto. More Blocks at: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html #
 BlacklistedBlocks:
   - stationary_water
   - stationary_lava

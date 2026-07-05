@@ -25,7 +25,8 @@ public class Commands {
     public void load() {
         commands.clear();
         for (RTPCommandType cmd : RTPCommandType.values())
-           registerCommand(cmd.getCmd(), false);
+            if (!cmd.isDebugOnly() || pl.getSettings().isDebug())
+                registerCommand(cmd.getCmd(), false);
     }
 
     public void registerCommand(RTPCommand cmd, boolean forced) {

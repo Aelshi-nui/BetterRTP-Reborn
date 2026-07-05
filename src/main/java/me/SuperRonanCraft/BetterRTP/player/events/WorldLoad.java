@@ -10,6 +10,8 @@ public class WorldLoad {
     WrappedTask loader;
 
     void load(WorldLoadEvent e) {
+        if (!BetterRTP.getInstance().getSettings().isWorldEnabled(e.getWorld().getName()))
+            return;
         //BetterRTP.getInstance().getLogger().info("NEW WORLD!");
         if (loader != null)
             loader.cancel();

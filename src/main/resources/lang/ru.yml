@@ -1,6 +1,6 @@
 # Translated to Russian by Logan (https://t.me/icemine_ru)
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success:
     Paid: '&aВы были телепортированы по координатам &7X: %x%, Y: %y%, Z: %z%&a за &7%attempts%&a попыток и &7$%price%.'
     Bypass: '&aВы были телепортированы по координатам &7X: %x%, Y: %y%, Z: %z%&a за &7%attempts%&a попыток.'
@@ -34,7 +34,7 @@ Messages:
     Remove: '&cУдалено! &7Вы удалили нестандартный мир %world%'
 
 Help:
-  Prefix: '&e&m-----&6&l BetterRTP &8| Помощь &e&m-----'
+  Prefix: '&e&m-----&6&l BetterRTPx &8| Помощь &e&m-----'
   Main: ' &7- &e/%command% &7- телепортирует Вас в рандомное место!'
   Biome: ' &7- &e/%command% biome <биом1, биом2...> &7- телепортирует Вас в рандомное место в указанных биомах'
   Edit: ' &7- &e/%command% edit <default/world> [аргументы...] &7- настройка некоторых данных плагина'

@@ -1,7 +1,7 @@
 **Plugin Version**:
 <!--               "Latest" is not a valid answer               -->
 <!--         Make sure you're using the latest version          -->
-<!--       from https://www.spigotmc.org/resources/36081/       -->
+<!--         Make sure you're using a current BetterRTPx build         -->
 
 **Issue Type**:
 <!-- Files not loading nor generating, commands aren't working, ect. -->

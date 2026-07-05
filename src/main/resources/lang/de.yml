@@ -1,6 +1,6 @@
 # German, Translated by Noel#3000 on Discord
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success: # # Platzhalter! %x% %y% und %z% sind die x, y, und z Koordinaten zu denen der Spieler teleportiert wird! #
     Paid: '&aDu wurdest teleportiert zu &7 x=%x% y=%y% z=%z% für &c$%price%&7 nach &f%attempts% &7Versuchen!'
     Bypass: '&aDu wurdest teleportiert zu&7 x=%x% y=%y% z=%z% nach &f%attempts% &7Versuchen'
@@ -34,7 +34,7 @@ Messages:
     Remove: '&cEntfernt! &7YDu hast die Welt %world% entfernt.'
 
 Help:
-  Prefix: '&e&m-----&6&l BetterRTP &8| Hilfe &e&m-----'
+  Prefix: '&e&m-----&6&l BetterRTPx &8| Hilfe &e&m-----'
   Main: ' &7- &e/%command% &7- Teleportiere dich an einen zufälligen Ort!'
   Biome: ' &7- &e/%command% biome <biome1, biome2...> &7- An einen zufälligen Ort in diesen Biomen teleportieren'
   Edit: ' &7- &e/%command% edit <default/world> [args...] &7- Ändere ein paar Plugin-Einstellungen'

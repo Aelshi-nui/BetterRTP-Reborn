@@ -1,6 +1,6 @@
 # Segíts lefordítani ezt a fájlt több nyelvre!
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success:
     Paid: '&aÁttelepítve ide&7 x=%x% y=%y% z=%z% &c$%price%-ért&7!'
     Bypass: '&aÁttelepítve ide&7 x=%x% y=%y% z=%z%'
@@ -40,7 +40,7 @@ Messages:
     Remove: '&cEltávolítva! &7Eltávolítottad a Custom Világ %world%-ot'
 
 Help:
-  Prefix: '&e&m-----&6&l BetterRTP &8| Segítség &e&m-----'
+  Prefix: '&e&m-----&6&l BetterRTPx &8| Segítség &e&m-----'
   Main: ' &7- &e/%command% &7- Véletlenszerűen teleportál!'
   Biome: ' &7- &e/%command% biome <biome1, biome2...> &7- Véletlenszerűen teleportál
     ezekbe a biómákba'

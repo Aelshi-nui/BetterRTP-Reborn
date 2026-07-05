@@ -7,7 +7,6 @@ import me.SuperRonanCraft.BetterRTP.references.rtpinfo.QueueData;
 import me.SuperRonanCraft.BetterRTP.references.rtpinfo.QueueGenerator;
 import me.SuperRonanCraft.BetterRTP.references.rtpinfo.QueueHandler;
 import me.SuperRonanCraft.BetterRTP.references.rtpinfo.worlds.RTPWorld;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 
@@ -89,19 +88,18 @@ public class DatabaseQueue extends SQLite {
         List<QueueData> queueDataList = new ArrayList<>();
         try {
             conn = getSQLConnection();
-            //ps = conn.prepareStatement("SELECT * FROM " + tables.get(0) + " WHERE ? BETWEEN ? AND ? AND ? BETWEEN ? AND ?");
-            ps = conn.prepareStatement("SELECT * FROM " + tables.get(0) + " WHERE "
-                    + COLUMNS.WORLD.name + " = '" + range.getWorld().getName() + "' AND "
-                    + COLUMNS.X.name + " BETWEEN " + range.getXLow() + " AND " + range.getXHigh()
-                    + " AND " + COLUMNS.Z.name + " BETWEEN " + range.getZLow() + " AND " + range.getZHigh()
-                    + " ORDER BY RANDOM() LIMIT " + (QueueGenerator.queueMax + 1)
+            ps = conn.prepareStatement("SELECT * FROM " + quoteIdentifier(tables.get(0)) + " WHERE "
+                    + quoteIdentifier(COLUMNS.WORLD.name) + " = ? AND "
+                    + quoteIdentifier(COLUMNS.X.name) + " BETWEEN ? AND ?"
+                    + " AND " + quoteIdentifier(COLUMNS.Z.name) + " BETWEEN ? AND ?"
+                    + " ORDER BY RANDOM() LIMIT ?"
             );
-            /*ps.setString(1, COLUMNS.X.name);
+            ps.setString(1, range.getWorld().getName());
             ps.setInt(2, range.getXLow());
             ps.setInt(3, range.getXHigh());
-            ps.setString(4, COLUMNS.Z.name);
-            ps.setInt(5, range.getZLow());
-            ps.setInt(6, range.getZHigh());*/
+            ps.setInt(4, range.getZLow());
+            ps.setInt(5, range.getZHigh());
+            ps.setInt(6, QueueGenerator.queueMax + 1);
 
             //BetterRTP.getInstance().getLogger().info(ps.toString());
             rs = ps.executeQuery();
@@ -111,9 +109,8 @@ public class DatabaseQueue extends SQLite {
                 String worldName = rs.getString(COLUMNS.WORLD.name);
                 int id = rs.getInt(COLUMNS.ID.name);
                 long generated = rs.getLong(COLUMNS.GENERATED.name);
-                World world = Bukkit.getWorld(worldName);
-                if (world != null) {
-                    queueDataList.add(new QueueData(new Location(world, x, 69 /*giggity*/, z), generated, id));
+                if (range.getWorld().getName().equals(worldName)) {
+                    queueDataList.add(new QueueData(new Location(range.getWorld(), x, 69, z), generated, id));
                     //queueDataList.add(data);
                 }
             }
@@ -156,10 +153,11 @@ public class DatabaseQueue extends SQLite {
         int count = 0;
         try {
             conn = getSQLConnection();
-            ps = conn.prepareStatement("SELECT * FROM " + tables.get(0));
+            ps = conn.prepareStatement("SELECT COUNT(*) FROM " + quoteIdentifier(tables.get(0)));
 
             rs = ps.executeQuery();
-            count = rs.getFetchSize();
+            if (rs.next())
+                count = rs.getInt(1);
         } catch (SQLException ex) {
             BetterRTP.getInstance().getLogger().log(Level.SEVERE, Errors.sqlConnectionExecute(), ex);
         } finally {

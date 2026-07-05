@@ -1,6 +1,6 @@
 # Hjelp med å oversette denne filen til flere språk!
 Messages:
-  Prefix: '&7 [&6BetterRTP &7]'
+  Prefix: '&7 [&6BetterRTPx &7]'
   Success: ## Plassholdere! %x% %y%og %z% er koordinatene x, y og z som spilleren blir teleportert til! #
     Paid: '&aDu har blitt teleportert til &7 x=%x%, y=%y%, z=%z%, for &c $%price%&7 i &f%attempts%&7 forsøk!'
     Bypass: '&Du har been teleportert to &7 x=%x% y=%y% z=%z% etter &f%attempts%&7 forsøk'
@@ -34,7 +34,7 @@ Messages:
     Remove: '&cFjernet! &7Du fjernet egendefinert verden %world%'
 
 Help:
-  Prefix: '&e &m ----- &6 &l BetterRTP &8 | Hjelp &e &m ----- '
+  Prefix: '&e &m ----- &6 &l BetterRTPx &8 | Hjelp &e &m ----- '
   Main: '&7- &e /%command%&7- Teleporterer deg tilfeldig!'
   Biome: '&7- &e /%command% biome <biome1, biome2 ...> &7- Tilfeldig teleportering med disse biomene'
   Edit: '&7- &e /%command% edit <default / world> [args ...] &7- Edit some plugin settings'

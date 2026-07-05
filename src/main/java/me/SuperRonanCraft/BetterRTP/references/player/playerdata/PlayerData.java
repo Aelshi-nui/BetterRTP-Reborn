@@ -1,6 +1,7 @@
 package me.SuperRonanCraft.BetterRTP.references.player.playerdata;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -16,7 +17,7 @@ public class PlayerData {
     //Menus
     @Getter final PlayerData_Menus menu = new PlayerData_Menus();
     //Player Data
-    @Getter final HashMap<World, CooldownData> cooldowns = new HashMap<>();
+    @Getter final Map<World, CooldownData> cooldowns = new ConcurrentHashMap<>();
     //@Getter @Setter CooldownData globalCooldown;
     @Getter @Setter boolean rtping;
     @Getter @Setter int rtpCount;

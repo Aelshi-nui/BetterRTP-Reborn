@@ -1,6 +1,6 @@
 # Translation author: ViaSnake (GitHub)
 Messages:
-  Prefix: '&7[&6BetterRTP&7] '
+  Prefix: '&7[&6BetterRTPx&7] '
   Success:
     Paid: '&aあなたは&c$%price%&aで&7x=%x% y=%y% z=%z% に&f%attempts%&7回の試行でTPされました！'
     Bypass: '&aあなたは&7x=%x% y=%y% z=%z% に&f%attempts%&7回の試行でTPされました！'
@@ -34,7 +34,7 @@ Messages:
 #    Remove: '&cRemoved! &7You removed the Custom World %world%'
 
 Help:
-#  Prefix: '&e&m-----&6&l BetterRTP &8| Help &e&m-----'
+#  Prefix: '&e&m-----&6&l BetterRTPx &8| Help &e&m-----'
   Main: ' &7- &e/%command% &7- あなたをランダムテレポートする！'
   Biome: ' &7- &e/%command% biome <biome1, biome2...> &7- Randomly teleport withing these biomes'
 #  Edit: ' &7- &e/%command% edit <default/world> [args...] &7- Edit some plugin settings'

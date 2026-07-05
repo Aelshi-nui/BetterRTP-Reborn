@@ -6,14 +6,20 @@ import me.SuperRonanCraft.BetterRTP.BetterRTP;
 
 public class FoliaHandler {
 
+    private FoliaLib FOLIA_LIB;
     private ServerImplementation SERVER_IMPLEMENTATION;
 
     public void load() {
-        this.SERVER_IMPLEMENTATION = new FoliaLib(BetterRTP.getInstance()).getImpl();
+        this.FOLIA_LIB = new FoliaLib(BetterRTP.getInstance());
+        this.SERVER_IMPLEMENTATION = FOLIA_LIB.getImpl();
     }
 
     public ServerImplementation get() {
         return SERVER_IMPLEMENTATION;
+    }
+
+    public boolean isFolia() {
+        return FOLIA_LIB != null && FOLIA_LIB.isFolia();
     }
 
 }
